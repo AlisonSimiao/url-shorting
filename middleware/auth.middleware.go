@@ -1,7 +1,8 @@
 package middleware
 
 import (
-	"time-wise/token"
+	"url-shorting/token"
+
 	"github.com/gin-gonic/gin"
 )
 

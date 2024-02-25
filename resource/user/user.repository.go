@@ -1,6 +1,6 @@
 package user
 
-import "time-wise/repository"
+import "url-shorting/repository"
 
 type UserRepository struct {
 	repository.Repository

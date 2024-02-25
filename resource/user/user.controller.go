@@ -1,7 +1,8 @@
 package user
 
 import (
-	"time-wise/resource/photo"
+	"url-shorting/resource/photo"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -100,7 +101,7 @@ func (uc *UserController) Login(c *gin.Context) {
 		return
 	}
 	Body := body.(map[string]interface{})
-	
+
 	user, rest_error := userService.login(UserLogin{
 		Email:    Body["email"].(string),
 		Password: Body["password"].(string),

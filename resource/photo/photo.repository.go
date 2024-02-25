@@ -1,6 +1,6 @@
 package photo
 
-import "time-wise/repository"
+import "url-shorting/repository"
 
 type PhotoRepository struct {
 	repository.Repository
@@ -12,4 +12,3 @@ func NewPhotoRepository() *repository.Repository {
 	pr.Repository.Super("photos")
 	return &pr.Repository
 }
-

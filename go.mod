@@ -1,4 +1,4 @@
-module time-wise
+module url-shorting
 
 go 1.20
 

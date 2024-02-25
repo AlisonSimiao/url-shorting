@@ -3,7 +3,7 @@ package middleware
 import (
 	"mime/multipart"
 	"net/url"
-	message "time-wise/utils"
+	message "url-shorting/utils"
 
 	"github.com/gin-gonic/gin"
 	"github.com/thedevsaddam/govalidator"
@@ -35,7 +35,7 @@ var Messages = govalidator.MapData{
 	},
 	"status": []string{
 		"required:" + message.Required("status"),
-		"in:" + message.IsIn("status", "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"),
+		"in:" + message.IsIn("status", "1, 2"),
 		"numeric:" + message.Numeric("status"),
 	},
 }

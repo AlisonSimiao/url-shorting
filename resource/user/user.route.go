@@ -1,8 +1,8 @@
 package user
 
 import (
-	"time-wise/api"
-	"time-wise/middleware"
+	"url-shorting/api"
+	"url-shorting/middleware"
 )
 
 var uv = NewUserValidate()

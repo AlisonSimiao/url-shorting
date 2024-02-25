@@ -2,7 +2,7 @@ package photo
 
 import (
 	"mime/multipart"
-	"time-wise/storage"
+	"url-shorting/storage"
 
 	"github.com/gin-gonic/gin"
 )

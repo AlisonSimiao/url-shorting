@@ -3,10 +3,10 @@ package user
 import (
 	"mime/multipart"
 	"time"
-	"time-wise/repository"
-	"time-wise/resource/photo"
-	rest_error "time-wise/restError"
-	"time-wise/token"
+	"url-shorting/repository"
+	"url-shorting/resource/photo"
+	rest_error "url-shorting/restError"
+	"url-shorting/token"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
@@ -32,7 +32,7 @@ func hashPassword(password string) string {
 
 type object map[string]interface{}
 
-func (u *UserService) update(id int, body User, c *gin.Context) (*rest_error.Err) {
+func (u *UserService) update(id int, body User, c *gin.Context) *rest_error.Err {
 	var user UserResponse
 
 	u.ur.FindOne("id = @id", object{"id": id}, &user)

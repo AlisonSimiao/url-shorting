@@ -1,7 +1,7 @@
 package repository
 
 import (
-	db "time-wise/database"
+	db "url-shorting/database"
 
 	"gorm.io/gorm"
 )
