@@ -1,0 +1,11 @@
+DB_USER=postgres
+DB_HOST=db.yoegocppoqdjwvluebjn.supabase.co
+DB_NAME=postgres
+DB_PORT=6543
+DB_PASS=AiRao0SdH0DWCqqZ
+SECRET_KEY=senhasenha
+
+API_HOST= "localhost"
+API_PORT= 3000
+
+CLOUDINARY_URL=cloudinary://637116733468799:2KrNLC8llVCSNjO7ULzzO-0wgHM@dbwxgur7d
