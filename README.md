@@ -37,14 +37,16 @@
 
 Metodo | rota | descrição
 ---  | --- | ---
-POST | /users/singin | SE logar na rede
-POST |  /users/singup | SE cadastrar
-POST | /link | criar link
-GET | /link | buscar todos link
-GET | /link/:hash | buscar um link
-PATCH | /link/:hash | atualizar um link
-DELETE | /link/:hash | deletar um link
-PATCH | /link/:hash/click | atualizar a quantidade de clicks 
+POST | /users/singin | Se logar na rede
+POST |  /users/singup | Se cadastrar
+GET | /users/:username | Pesquisar usuario
+PATCH | /users/:username | Alterar usuario
+POST | /link | Criar link
+GET | /link | Buscar todos link
+GET | /link/:hash | Buscar um link
+PATCH | /link/:hash | Atualizar um link
+DELETE | /link/:hash | Deletar um link
+PATCH | /link/:hash/click | Atualizar a quantidade de clicks 
 
 ### Tabelas
 
