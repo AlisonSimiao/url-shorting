@@ -4,11 +4,33 @@
 
 ## Frontend
 
+### Tecnologias
+
+- TypeScript
+  - Next.js
+  - Tailwind CSS 
+
+### Telas
+
+- Login
+- Cadastro
+- Redirect
+- Main Page
+- Perfil
+
 ## Backend
 
 ### Tecnologias
 
 - Golang
+  - Gin-gonic
+  - Golang-jwt
+  - Google-Uuid
+  - GoValidator
+  - GoDotenv
+  - Crypto
+  - Postgres
+  - Gorm
 - Postgres
 
 ### Routers
@@ -22,16 +44,15 @@ GET | /link | buscar todos link
 GET | /link/:hash | buscar um link
 PATCH | /link/:hash | atualizar um link
 DELETE | /link/:hash | deletar um link
+PATCH | /link/:hash/click | atualizar a quantidade de clicks 
 
 ### Tabelas
 
 - users
-  nome | tipo
-  ---| ---
-  name | string
-  email | string
-  password | string
-  birth |
-
+- qrcodes
 - clicks
 - links
+
+### Schema
+
+![imagem do schema](./assets/schema.png)
