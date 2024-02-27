@@ -33,6 +33,12 @@ var Messages = govalidator.MapData{
 		"max:" + message.MaxLength("description", "100"),
 		"alpha_num:" + message.AlphaNum("description"),
 	},
+	"username": []string{
+		"required:" + message.Required("username"),
+		"min" + message.MinLength("username", "3"),
+		"max:" + message.MaxLength("username", "16"),
+		"alpha_num:" + message.AlphaNum("username"),
+	},
 	"status": []string{
 		"required:" + message.Required("status"),
 		"in:" + message.IsIn("status", "1, 2"),
