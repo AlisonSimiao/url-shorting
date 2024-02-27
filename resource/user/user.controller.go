@@ -1,7 +1,9 @@
 package user
 
 import (
-	"url-shorting/resource/photo"
+	//"url-shorting/resource/photo"
+
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,7 +16,8 @@ func NewUserController() *UserController {
 }
 
 var userService = NewUserService()
-var photoService = photo.NewPhotoService()
+
+//var photoService = photo.NewPhotoService()
 
 func (uc *UserController) FindOne(c *gin.Context) {
 	userIDString, _ := c.Get("idUser")
@@ -29,29 +32,37 @@ func (uc *UserController) FindOne(c *gin.Context) {
 }
 
 func (uc *UserController) Update(c *gin.Context) {
-	data, exist := c.Get("body")
-	body := make(map[string]string)
+	body, exist := c.Get("body")
+
+	userUpdates := User{}
 
 	if !exist {
 		c.AbortWithStatusJSON(500, gin.H{"error": "Erro no servidor"})
 		return
 	}
 
-	for key, value := range data.(map[string]interface{}) {
-		if stringValue, ok := value.([]string); ok {
-			body[key] = stringValue[0]
-		} else {
-			body[key] = value.(string)
-		}
+	/* if name, ok := body["name"].(string); ok && name != "" {
+		userUpdates.Name = name
 	}
+	if email, ok := body["email"].(string); ok && email != "" {
+		userUpdates.Email = email
+	}
+	if password, ok := body["password"].(string); ok && password != "" {
+		userUpdates.Password = password
+	}
+	if username, ok := body["username"].(string); ok && username != "" {
+		userUpdates.Username = username
+	}
+	if status, ok := body["status"].(bool); ok {
+		userUpdates.Status = status
+	}
+	if pro, ok := body["pro"].(bool); ok {
+		userUpdates.Pro = pro
+	} */
 
 	userIDString, _ := c.Get("idUser")
-
-	rest_error := userService.update(userIDString.(int), User{
-		Name:     body["name"],
-		Email:    body["email"],
-		Password: body["password"],
-	}, c)
+	fmt.Println(body)
+	rest_error := userService.update(userIDString.(int), userUpdates, c)
 
 	if rest_error != nil {
 		c.AbortWithStatusJSON(rest_error.GetStatus(), rest_error.JsonError())
@@ -82,6 +93,9 @@ func (uc *UserController) Create(c *gin.Context) {
 		Name:     body["name"],
 		Email:    body["email"],
 		Password: body["password"],
+		Username: body["username"],
+		Status:   true,
+		Pro:      false,
 	}, c)
 
 	if rest_error != nil {
@@ -103,7 +117,7 @@ func (uc *UserController) Login(c *gin.Context) {
 	Body := body.(map[string]interface{})
 
 	user, rest_error := userService.login(UserLogin{
-		Email:    Body["email"].(string),
+		Username: Body["username"].(string),
 		Password: Body["password"].(string),
 	})
 

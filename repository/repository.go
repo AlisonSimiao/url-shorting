@@ -2,7 +2,6 @@ package repository
 
 import (
 	db "url-shorting/database"
-
 	"gorm.io/gorm"
 )
 

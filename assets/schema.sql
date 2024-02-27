@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS users (
   name VARCHAR(255) NOT NULL,
   status BOOLEAN NULL DEFAULT TRUE,
   pro BOOLEAN NULL DEFAULT FALSE,
-  PRIMARY KEY (id));
+  PRIMARY KEY (id)
+);
 
 
 -- -----------------------------------------------------

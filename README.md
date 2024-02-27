@@ -39,8 +39,8 @@ Metodo | rota | descrição
 ---  | --- | ---
 POST | /users/singin | Se logar na rede
 POST |  /users/singup | Se cadastrar
-GET | /users/:username | Pesquisar usuario
-PATCH | /users/:username | Alterar usuario
+GET | /users/:username | Pesquisar usuário
+PATCH | /users/:username | Alterar usuário
 POST | /link | Criar link
 GET | /link | Buscar todos link
 GET | /link/:hash | Buscar um link
