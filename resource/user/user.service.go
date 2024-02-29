@@ -2,13 +2,14 @@ package user
 
 import (
 	//"mime/multipart"
-	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
 	"time"
 	"url-shorting/repository"
 	"url-shorting/resource/photo"
 	rest_error "url-shorting/restError"
 	"url-shorting/token"
+
+	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type UserService struct {
@@ -58,6 +59,9 @@ func (u *UserService) update(id int, body User, c *gin.Context) *rest_error.Err 
 		Name:     body.Name,
 		Email:    body.Email,
 		Password: body.Password,
+		Username: body.Username,
+		Status:   body.Status,
+		Pro:      body.Pro,
 		//IdPhoto:  body.IdPhoto,
 	})
 

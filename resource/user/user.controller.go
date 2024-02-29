@@ -2,9 +2,6 @@ package user
 
 import (
 	//"url-shorting/resource/photo"
-
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -32,16 +29,18 @@ func (uc *UserController) FindOne(c *gin.Context) {
 }
 
 func (uc *UserController) Update(c *gin.Context) {
-	body, exist := c.Get("body")
+	_body, exist := c.Get("body")
 
 	userUpdates := User{}
+
+	body := _body.(map[string]interface{})
 
 	if !exist {
 		c.AbortWithStatusJSON(500, gin.H{"error": "Erro no servidor"})
 		return
 	}
 
-	/* if name, ok := body["name"].(string); ok && name != "" {
+	if name, ok := body["name"].(string); ok && name != "" {
 		userUpdates.Name = name
 	}
 	if email, ok := body["email"].(string); ok && email != "" {
@@ -58,10 +57,10 @@ func (uc *UserController) Update(c *gin.Context) {
 	}
 	if pro, ok := body["pro"].(bool); ok {
 		userUpdates.Pro = pro
-	} */
+	}
 
 	userIDString, _ := c.Get("idUser")
-	fmt.Println(body)
+	
 	rest_error := userService.update(userIDString.(int), userUpdates, c)
 
 	if rest_error != nil {
@@ -125,6 +124,6 @@ func (uc *UserController) Login(c *gin.Context) {
 		c.AbortWithStatusJSON(rest_error.GetStatus(), rest_error.JsonError())
 		return
 	}
-
+	c.SetCookie("auth_token", user.Token, 0, "/", "", false, true)
 	c.JSON(200, user)
 }
