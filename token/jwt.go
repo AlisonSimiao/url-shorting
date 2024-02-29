@@ -3,7 +3,6 @@ package token
 import (
 	"fmt"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -22,12 +21,7 @@ func ExtractJWTToken(authHeader string) (token, error string) {
 		return "", "Cabeçalho de autenticação ausente"
 	}
 
-	if !strings.HasPrefix(authHeader, "Bearer ") {
-		return "", "Cabeçalho de autenticação mal formatado. Deve começar com 'Bearer '"
-	}
-
-	token = strings.TrimPrefix(authHeader, "Bearer ")
-	return token, ""
+	return authHeader, ""
 }
 
 func CreateToken(id int, duration time.Duration) (string, error) {
