@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"mime/multipart"
+	"net/http"
 	"net/url"
 	message "url-shorting/utils"
 
@@ -100,7 +101,7 @@ func Validator(rules govalidator.MapData) func(*gin.Context) {
 				errors = append(errors, err...)
 			}
 
-			c.AbortWithStatusJSON(422, errors)
+			c.AbortWithStatusJSON(http.StatusUnprocessableEntity, errors)
 			return
 		}
 		if c.ContentType() == "multipart/form-data" {

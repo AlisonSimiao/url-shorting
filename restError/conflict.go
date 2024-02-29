@@ -1,5 +1,7 @@
 package rest_error
 
+import "net/http"
+
 type ConflictError struct {
 	Err
 }
@@ -7,6 +9,6 @@ type ConflictError struct {
 func NewConflictError(Mensagem string) *Err {
 	return &Err{
 		Mensagem: Mensagem,
-		status:   409,
+		status:   http.StatusConflict,
 	}
 }

@@ -1,5 +1,7 @@
 package rest_error
 
+import "net/http"
+
 type NotFoundError struct {
 	Err
 }
@@ -7,6 +9,6 @@ type NotFoundError struct {
 func NewNotFoundError(Mensagem string) *Err {
 	return &Err{
 		Mensagem: Mensagem,
-		status:   404,
+		status:   http.StatusNotFound,
 	}
 }

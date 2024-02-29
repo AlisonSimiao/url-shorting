@@ -2,6 +2,8 @@ package user
 
 import (
 	//"url-shorting/resource/photo"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,7 +27,7 @@ func (uc *UserController) FindOne(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, user)
+	c.JSON(http.StatusOK, user)
 }
 
 func (uc *UserController) Update(c *gin.Context) {
@@ -60,7 +62,7 @@ func (uc *UserController) Update(c *gin.Context) {
 	}
 
 	userIDString, _ := c.Get("idUser")
-	
+
 	rest_error := userService.update(userIDString.(int), userUpdates, c)
 
 	if rest_error != nil {
@@ -68,7 +70,7 @@ func (uc *UserController) Update(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, body)
+	c.JSON(http.StatusOK, body)
 }
 
 func (uc *UserController) Create(c *gin.Context) {
@@ -102,7 +104,7 @@ func (uc *UserController) Create(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, user)
+	c.JSON(http.StatusCreated, user)
 }
 
 func (uc *UserController) Login(c *gin.Context) {
@@ -125,5 +127,5 @@ func (uc *UserController) Login(c *gin.Context) {
 		return
 	}
 	c.SetCookie("auth_token", user.Token, 0, "/", "", false, true)
-	c.JSON(200, user)
+	c.JSON(http.StatusOK, user)
 }

@@ -1,5 +1,7 @@
 package rest_error
 
+import "net/http"
+
 type UnauthorizedError struct {
 	Err
 }
@@ -7,6 +9,6 @@ type UnauthorizedError struct {
 func NewUnauthorizedError(Mensagem string) *Err {
 	return &Err{
 		Mensagem: Mensagem,
-		status:   401,
+		status:   http.StatusUnauthorized,
 	}
 }

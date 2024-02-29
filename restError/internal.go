@@ -1,5 +1,7 @@
 package rest_error
 
+import "net/http"
+
 type InternalError struct {
 	Err
 }
@@ -7,6 +9,6 @@ type InternalError struct {
 func NewInternalError() *Err {
 	return &Err{
 		Mensagem: "Erro interno no servidor",
-		status:   404,
+		status:   http.StatusInternalServerError,
 	}
 }
