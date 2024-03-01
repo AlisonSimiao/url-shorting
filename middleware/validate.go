@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"mime/multipart"
 	"net/http"
 	"net/url"
@@ -44,6 +45,14 @@ var Messages = govalidator.MapData{
 		"required:" + message.Required("status"),
 		"in:" + message.IsIn("status", "1, 2"),
 		"numeric:" + message.Numeric("status"),
+	},
+	"original": []string{
+		"required:" + message.Required("original"),
+		"url:" + message.Url("original"),
+		"max:" + message.MaxLength("original", "255"),
+	},
+	"ative": []string{
+		"regex:" + message.Boolean("ative"),
 	},
 }
 
@@ -98,6 +107,7 @@ func Validator(rules govalidator.MapData) func(*gin.Context) {
 		if len(unprocessableErros) > 0 {
 			var errors []string
 			for _, err := range unprocessableErros {
+				fmt.Println(err)
 				errors = append(errors, err...)
 			}
 

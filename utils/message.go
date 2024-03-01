@@ -45,3 +45,11 @@ func Equal(field string, value string) string {
 func Between(field string, min string, max string) string {
 	return fmt.Sprintf("O campo %s deve estar entre %s e %s", field, min, max)
 }
+
+func Boolean(field string) string {
+	return fmt.Sprintf("O campo %s deve ser 'true' ou 'false'", field)
+}
+
+func Url(field string) string {
+	return fmt.Sprintf("O campo %s deve ser uma url válida", field)
+}
