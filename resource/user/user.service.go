@@ -31,7 +31,7 @@ func hashPassword(password string) string {
 
 type object map[string]interface{}
 
-func (u *UserService) update(id int, body User, c *gin.Context) *rest_error.Err {
+func (u *UserService) update(id int, body User) *rest_error.Err {
 	var user UserResponse
 
 	u.ur.FindOne("id = @id", object{"id": id}, &user)

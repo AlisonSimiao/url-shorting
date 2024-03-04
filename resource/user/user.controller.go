@@ -63,7 +63,7 @@ func (uc *UserController) Update(c *gin.Context) {
 
 	userIDString, _ := c.Get("idUser")
 
-	rest_error := userService.update(userIDString.(int), userUpdates, c)
+	rest_error := userService.update(userIDString.(int), userUpdates)
 
 	if rest_error != nil {
 		c.AbortWithStatusJSON(rest_error.GetStatus(), rest_error.JsonError())
