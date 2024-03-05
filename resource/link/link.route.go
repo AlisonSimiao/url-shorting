@@ -13,8 +13,8 @@ func CreateRoutes() {
 
 	api.CreateRoute("/link", "POST", middleware.Validator(lv.Create), lc.Create)
 	api.CreateRoute("/link/:hash", "GET", lc.FindOne)
-	api.CreateRoute("/link", "GET", lc.FindAll)
-	api.CreateRoute("/link/:hash", "PATCH", lc.Update)
+	//api.CreateRoute("/link", "GET", lc.FindAll)
+	api.CreateRoute("/link/:hash", "PATCH", middleware.Validator(lv.Update), lc.Update)
 	api.CreateRoute("/link/:hash", "DELETE", lc.Delete)
 	api.CreateRoute("/link/:hash/clicks", "PATCH", lc.UpdateClick)
 

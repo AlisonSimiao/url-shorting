@@ -1,14 +1,12 @@
 package link
 
 import (
+	"fmt"
 	"math/rand"
-	"time"
 	"url-shorting/repository"
 	"url-shorting/resource/click"
 	qrcode "url-shorting/resource/qr_code"
 	rest_error "url-shorting/restError"
-
-	"github.com/gin-gonic/gin"
 )
 
 type LinkService struct {
@@ -27,13 +25,30 @@ func NewLinkService() *LinkService {
 
 type object map[string]interface{}
 
-func (ls *LinkService) update(id int, c *gin.Context) *rest_error.Err {
+func (ls *LinkService) update(hash string, link LinkUpdate) *rest_error.Err {
+	var l Link
+
+	ls.lr.FindOne("hash = @hash", object{"hash": hash}, &l)
+	if l.Id == 0 {
+		return rest_error.NewNotFoundError(
+			fmt.Sprintf("Link com hash '%s' não foi encontrado.", hash),
+		)
+	}
+
+	if link.Original != "" {
+		qrCode, err := ls.qcs.Create(link.Original)
+		if qrCode.Id == 0 {
+			return err
+		}
+		link.IdQrCode = qrCode.Id
+	}
+
+	ls.lr.Update("hash = ?", hash, link)
 
 	return nil
 }
 
 func generateRandomString(length int) string {
-	rand.Seed(time.Now().UnixNano())
 	str := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	var bytes string
 

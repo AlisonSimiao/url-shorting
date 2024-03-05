@@ -20,6 +20,11 @@ type LinkCreate struct {
 	Ative    bool   `json:"ative"`
 }
 
+type LinkUpdate struct {
+	IdQrCode int64  `json:"id_qr_code"`
+	Original string `json:"original"`
+	Ative    bool   `json:"ative"`
+}
 type LinkResponse struct {
 	Id       int64  `json:"id"`
 	Clicks   int64  `json:"clicks"`
