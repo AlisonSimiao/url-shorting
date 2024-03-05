@@ -1,6 +1,7 @@
 package qrcode
 
 import (
+	"fmt"
 	"url-shorting/repository"
 	rest_error "url-shorting/restError"
 )
@@ -24,7 +25,8 @@ func (qs *QrCodeService) Create(url string) (QrCode, *rest_error.Err) {
 	if qrCode.Id != 0 {
 		return qrCode, nil
 	}
-	qrCode.Link = url
+
+	qrCode.Link = fmt.Sprintf("https://api.qrserver.com/v1/create-qr-code?data=%s", url)
 
 	qs.qcr.Create(&qrCode)
 
