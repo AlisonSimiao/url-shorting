@@ -12,7 +12,10 @@ var rulesCreate = govalidator.MapData{
 	"ative":    {"regex:^(true|false)$"},
 }
 
-var rulesUpdate = govalidator.MapData{}
+var rulesUpdate = govalidator.MapData{
+	"original": {"url", "max:255"},
+	"ative":    {"regex:^(true|false)$"},
+}
 
 func NewLinkValidate() LinkValidate {
 	return LinkValidate{
