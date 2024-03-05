@@ -97,7 +97,7 @@ func (uc *UserController) Create(c *gin.Context) {
 		Username: body["username"],
 		Status:   true,
 		Pro:      false,
-	}, c)
+	})
 
 	if rest_error != nil {
 		c.AbortWithStatusJSON(rest_error.GetStatus(), rest_error.JsonError())

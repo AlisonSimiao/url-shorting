@@ -7,8 +7,6 @@ import (
 	"url-shorting/resource/photo"
 	rest_error "url-shorting/restError"
 	"url-shorting/token"
-
-	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -68,7 +66,7 @@ func (u *UserService) update(id int, body User) *rest_error.Err {
 	return nil
 }
 
-func (u *UserService) create(body User, c *gin.Context) (UserResponse, *rest_error.Err) {
+func (u *UserService) create(body User) (UserResponse, *rest_error.Err) {
 	var user UserResponse
 	//urlPhoto := photoService.GetDefaultPhoto()
 
