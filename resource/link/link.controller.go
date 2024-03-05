@@ -68,7 +68,16 @@ func (lc *LinkController) Delete(c *gin.Context) {
 
 func (lc *LinkController) UpdateClick(c *gin.Context) {
 
-	c.JSON(http.StatusOK, "body")
+	hash := c.Param("hash")
+
+	rest_error := lc.ls.updateClick(hash)
+
+	if rest_error != nil {
+		c.AbortWithStatusJSON(rest_error.GetStatus(), rest_error.JsonError())
+		return
+	}
+
+	c.Status(http.StatusOK)
 }
 
 func (lc *LinkController) Create(c *gin.Context) {

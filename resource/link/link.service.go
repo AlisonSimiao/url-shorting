@@ -107,6 +107,23 @@ func (ls *LinkService) create(idUser int, link Link) (*LinkResponse, *rest_error
 	}, nil
 }
 
+func (ls *LinkService) updateClick(hash string) ( *rest_error.Err) {
+	var link Link
+
+	ls.lr.FindOne("hash = @hash", object{"hash": hash}, &link)
+	if link.Id == 0 {
+		return rest_error.NewNotFoundError(
+			fmt.Sprintf("Link com hash '%s' não foi encontrado.", hash),
+		)
+	}
+
+	err := ls.cs.AddClick(link.IdClick)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (ls *LinkService) findOne(id int) *rest_error.Err {
 
 	return nil
