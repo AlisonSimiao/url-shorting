@@ -11,8 +11,8 @@ func CreateRoutes() {
 	api := api.New()
 	uc := NewUserController()
 
-	api.CreateRoute("/users/singin", "POST", middleware.Validator(uv.Login), uc.Login)
-	api.CreateRoute("/users/singup", "POST", middleware.Validator(uv.Create), uc.Create)
+	api.CreateRoute("/users/signin", "POST", middleware.Validator(uv.Login), uc.Login)
+	api.CreateRoute("/users/signup", "POST", middleware.Validator(uv.Create), uc.Create)
 }
 
 func CreatePrivateRoutes() {
