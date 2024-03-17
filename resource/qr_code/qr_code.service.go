@@ -36,3 +36,14 @@ func (qs *QrCodeService) Create(url string) (QrCode, *rest_error.Err) {
 
 	return qrCode, nil
 }
+
+func (qs *QrCodeService) FindOne(id int64) (QrCode, *rest_error.Err) {
+
+	var qrCode QrCode
+	qs.qcr.FindOne("id = @id", object{"id": id}, &qrCode)
+	if qrCode.Id == 0 {
+		return qrCode, rest_error.NewInternalError()
+	}
+
+	return qrCode, nil 
+}

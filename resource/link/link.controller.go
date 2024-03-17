@@ -2,6 +2,8 @@ package link
 
 import (
 	"net/http"
+	"strconv"
+	"url-shorting/repository"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,7 +20,45 @@ func NewLinkController() *LinkController {
 
 func (lc *LinkController) FindOne(c *gin.Context) {
 
-	c.JSON(http.StatusOK, "link")
+	hash := c.Param("hash")
+	
+	link, erro := lc.ls.findOne(hash)
+	if erro != nil {
+		c.AbortWithStatusJSON(erro.GetStatus(), erro.GetMensagem())
+		return 
+	}	
+
+	c.JSON(http.StatusOK, link)
+}
+
+func (lc *LinkController) FindAll(c *gin.Context) {
+
+	//Pega Id do Usuario.
+	page, erro := strconv.Atoi( c.Query("pagina"))
+	if erro != nil {
+		page = 0
+	}
+
+	limit, erro := strconv.Atoi( c.Query("registros"))
+	if erro != nil {
+		limit =0
+	}
+
+	pageI := repository.Page(limit, page)
+
+	idUser, exist := c.Get("idUser")
+	if !exist {
+		c.AbortWithStatusJSON(500, gin.H{"error": "Erro no servidor"})
+		return
+	}
+
+	//volta 
+	links, err := lc.ls.findAll(idUser.(int), pageI.Page, pageI.Limit)
+	if err != nil {
+		c.AbortWithStatusJSON(err.GetStatus(), err.GetMensagem())
+		return
+	}
+	c.JSON(http.StatusOK, links)
 }
 
 func (lc *LinkController) Update(c *gin.Context) {

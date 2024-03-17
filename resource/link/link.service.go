@@ -107,7 +107,7 @@ func (ls *LinkService) create(idUser int, link Link) (*LinkResponse, *rest_error
 	}, nil
 }
 
-func (ls *LinkService) updateClick(hash string) ( *rest_error.Err) {
+func (ls *LinkService) updateClick(hash string) *rest_error.Err {
 	var link Link
 
 	ls.lr.FindOne("hash = @hash", object{"hash": hash}, &link)
@@ -124,7 +124,47 @@ func (ls *LinkService) updateClick(hash string) ( *rest_error.Err) {
 	return nil
 }
 
-func (ls *LinkService) findOne(id int) *rest_error.Err {
+func (ls *LinkService) findOne(hash string) (*LinkResponse, *rest_error.Err) {
 
-	return nil
+	var link LinkResponse
+	ls.lr.FindOneWithJoin(`
+	ORIGINAL,
+	links.ID,
+  	HASH,
+  	ATIVE,
+	clicks.VALUE AS clicks,
+  	qr_codes.link AS qr_code
+	`,
+	`
+	LEFT JOIN clicks ON links.id_click = clicks.id
+	LEFT JOIN qr_codes ON links.id_qr_code = qr_codes.id`,
+		"Hash=?", hash, &link)
+
+	if link.Id == 0 {
+		return nil, rest_error.NewNotFoundError(
+			fmt.Sprintf("Link com Hash '%s' não foi encontrado.", hash),
+		)
+	}
+
+	return &link, nil
+}
+
+func (ls *LinkService) findAll(idUser int, page int, limit int) (*repository.PaginateData, *rest_error.Err) {
+	//trazer os links do banco e colocar no array
+	var links []LinkResponse
+	
+	res := ls.lr.PaginateWithJoin(`
+	ORIGINAL,
+  	HASH,
+  	ATIVE,
+	clicks.VALUE AS clicks,
+  	qr_codes.link AS qr_code
+	`,
+		`
+	LEFT JOIN clicks ON links.id_click = clicks.id
+	LEFT JOIN qr_codes ON links.id_qr_code = qr_codes.id`,
+		`id_user = ?`, idUser, &links, page, limit)
+
+	return res, nil
+
 }

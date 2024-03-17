@@ -12,3 +12,6 @@ func NewLinkRepository() *repository.Repository {
 	lr.Repository.Super("links")
 	return &lr.Repository
 }
+
+
+
