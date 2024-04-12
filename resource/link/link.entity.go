@@ -25,6 +25,7 @@ type LinkUpdate struct {
 	Original string `json:"original"`
 	Ative    bool   `json:"ative"`
 }
+
 type LinkResponse struct {
 	Id       int64  `json:"id"`
 	Clicks   int64  `json:"clicks"`

@@ -101,10 +101,20 @@ func (lc *LinkController) Update(c *gin.Context) {
 	c.JSON(http.StatusOK, body)
 }
 
-func (lc *LinkController) Delete(c *gin.Context) {
+func (lc *LinkController) Delete(c *gin.Context) {	
 
-	c.JSON(http.StatusOK, "body")
+	hash := c.Param("hash")	
+
+	rest_error := lc.ls.delete(hash)
+
+	if rest_error != nil {
+		c.AbortWithStatusJSON(204, rest_error.JsonError())
+		return
+	}
+
+	c.Status(http.StatusOK)
 }
+
 
 func (lc *LinkController) UpdateClick(c *gin.Context) {
 

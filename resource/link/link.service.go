@@ -48,6 +48,37 @@ func (ls *LinkService) update(hash string, link LinkUpdate) *rest_error.Err {
 	return nil
 }
 
+func (ls *LinkService) delete(hash string) *rest_error.Err {
+
+	//Encontrar o ID e criando o erro se a verifição indicar que o ID é 0.
+
+	var l Link
+	ls.lr.FindOne("hash = @hash", object{"hash": hash}, &l)
+	if l.Id == 0 {
+		return rest_error.NewNotFoundError(
+			fmt.Sprintf("Link com hash '%s' não foi encontrado.", hash),
+		)
+	}
+
+	//Deletar o Click.
+
+	_, deleteClick := ls.cs.Delete(l.Id)
+	if deleteClick != nil {
+		return deleteClick
+	}
+
+	//Deletar o link e caso o link for igual a nulo, dar a mensagem de erro.
+
+	link := ls.lr.Delete("hash = ?", hash)
+	if link == nil {
+		return rest_error.NewNotFoundError(
+			"Erro ao excluir link",
+		)
+	}
+
+	return nil
+}
+
 func generateRandomString(length int) string {
 	str := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	var bytes string
@@ -135,7 +166,7 @@ func (ls *LinkService) findOne(hash string) (*LinkResponse, *rest_error.Err) {
 	clicks.VALUE AS clicks,
   	qr_codes.link AS qr_code
 	`,
-	`
+		`
 	LEFT JOIN clicks ON links.id_click = clicks.id
 	LEFT JOIN qr_codes ON links.id_qr_code = qr_codes.id`,
 		"Hash=?", hash, &link)
@@ -152,7 +183,7 @@ func (ls *LinkService) findOne(hash string) (*LinkResponse, *rest_error.Err) {
 func (ls *LinkService) findAll(idUser int, page int, limit int) (*repository.PaginateData, *rest_error.Err) {
 	//trazer os links do banco e colocar no array
 	var links []LinkResponse
-	
+
 	res := ls.lr.PaginateWithJoin(`
 	ORIGINAL,
   	HASH,
