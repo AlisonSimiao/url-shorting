@@ -50,21 +50,19 @@ func (cs *ClickService) FindOne(id int64) (Click, *rest_error.Err) {
 	return click, nil 
 }
 
-func (cs *ClickService) Delete(id int64) (Click, *rest_error.Err) {
+func (cs *ClickService) Delete(id int64) (*rest_error.Err) {
 	var click Click
 	cs.cr.FindOne("id = @id", object{"id": id}, &click)
 	if click.Id == 0 {
-		return click, rest_error.NewNotFoundError(
+		return rest_error.NewNotFoundError(
 			"Click não encontrado",
 		)
 	}
 
-	deleteClick:= cs.cr.Delete("id = @id", object{"id": id})
+	deleteClick:= cs.cr.Delete("id = ?", id)
 	if deleteClick != nil {
-		return click, rest_error.NewNotFoundError(
-			"Erro ao excluir Click",
-		)
+		return rest_error.NewInternalError()
 	}
 
-	return click, nil
+	return nil
 }

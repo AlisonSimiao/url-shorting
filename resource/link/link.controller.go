@@ -21,12 +21,12 @@ func NewLinkController() *LinkController {
 func (lc *LinkController) FindOne(c *gin.Context) {
 
 	hash := c.Param("hash")
-	
+
 	link, erro := lc.ls.findOne(hash)
 	if erro != nil {
 		c.AbortWithStatusJSON(erro.GetStatus(), erro.GetMensagem())
-		return 
-	}	
+		return
+	}
 
 	c.JSON(http.StatusOK, link)
 }
@@ -34,14 +34,14 @@ func (lc *LinkController) FindOne(c *gin.Context) {
 func (lc *LinkController) FindAll(c *gin.Context) {
 
 	//Pega Id do Usuario.
-	page, erro := strconv.Atoi( c.Query("pagina"))
+	page, erro := strconv.Atoi(c.Query("pagina"))
 	if erro != nil {
 		page = 0
 	}
 
-	limit, erro := strconv.Atoi( c.Query("registros"))
+	limit, erro := strconv.Atoi(c.Query("registros"))
 	if erro != nil {
-		limit =0
+		limit = 0
 	}
 
 	pageI := repository.Page(limit, page)
@@ -52,7 +52,7 @@ func (lc *LinkController) FindAll(c *gin.Context) {
 		return
 	}
 
-	//volta 
+	//volta
 	links, err := lc.ls.findAll(idUser.(int), pageI.Page, pageI.Limit)
 	if err != nil {
 		c.AbortWithStatusJSON(err.GetStatus(), err.GetMensagem())
@@ -101,20 +101,21 @@ func (lc *LinkController) Update(c *gin.Context) {
 	c.JSON(http.StatusOK, body)
 }
 
-func (lc *LinkController) Delete(c *gin.Context) {	
+func (lc *LinkController) Delete(c *gin.Context) {
 
-	hash := c.Param("hash")	
-
+	hash := c.Param("hash")
+	if hash == "" {
+		c.AbortWithStatusJSON(400, gin.H{"error": "Hash não informado"})
+	}
 	rest_error := lc.ls.delete(hash)
 
 	if rest_error != nil {
-		c.AbortWithStatusJSON(204, rest_error.JsonError())
+		c.AbortWithStatusJSON(rest_error.GetStatus(), rest_error.JsonError())
 		return
 	}
 
 	c.Status(http.StatusOK)
 }
-
 
 func (lc *LinkController) UpdateClick(c *gin.Context) {
 

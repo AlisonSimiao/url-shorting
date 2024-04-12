@@ -51,7 +51,7 @@ func (ls *LinkService) update(hash string, link LinkUpdate) *rest_error.Err {
 func (ls *LinkService) delete(hash string) *rest_error.Err {
 
 	//Encontrar o ID e criando o erro se a verifição indicar que o ID é 0.
-
+	fmt.Println(hash)
 	var l Link
 	ls.lr.FindOne("hash = @hash", object{"hash": hash}, &l)
 	if l.Id == 0 {
@@ -62,18 +62,16 @@ func (ls *LinkService) delete(hash string) *rest_error.Err {
 
 	//Deletar o Click.
 
-	_, deleteClick := ls.cs.Delete(l.Id)
-	if deleteClick != nil {
-		return deleteClick
+	error := ls.cs.Delete(l.IdClick)
+	if error != nil {
+		return error
 	}
 
 	//Deletar o link e caso o link for igual a nulo, dar a mensagem de erro.
 
-	link := ls.lr.Delete("hash = ?", hash)
-	if link == nil {
-		return rest_error.NewNotFoundError(
-			"Erro ao excluir link",
-		)
+	errorDelete := ls.lr.Delete("id = ?", l.Id)
+	if errorDelete != nil {
+		return rest_error.NewInternalError()
 	}
 
 	return nil
