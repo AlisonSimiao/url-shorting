@@ -34,8 +34,14 @@ func (a *API) GetInstance() *gin.Engine {
 }
 
 func (a *API) Start() {
+	var port int
 	host := os.Getenv("API_HOST")
-	port, _ := strconv.Atoi(os.Getenv("API_PORT"))
+	_port, err := strconv.Atoi(os.Getenv("API_PORT"))
+	if err != nil {
+		port = 8080
+	} else {
+		port = _port
+	}
 
 	if a.isRuning {
 		return
