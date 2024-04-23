@@ -2,6 +2,12 @@
 
 # Encurtador de links
 
+## Acesso
+
+#### URL 
+
+- https://url-shorting-7jko.onrender.com
+
 ## Frontend
 
 ### Tecnologias
