@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -22,7 +23,7 @@ func Connect() error {
 	})
 
 	if err != nil {
-		fmt.Printf("ERR> database connection failed %s", err)
+		log.Fatal("ERR> database connection failed %s", err)
 		return err
 	}
 
@@ -31,10 +32,9 @@ func Connect() error {
 	return nil
 }
 
-
 func ConnectCredential(user, password, host, port, dbname string) error {
 	conn := fmt.Sprintf("user=%s password=%s host=%s port=%s dbname=%s", user, password, host, port, dbname)
-	
+
 	db, err := gorm.Open(postgres.Open(conn), &gorm.Config{
 		PrepareStmt:            false,
 		SkipDefaultTransaction: true,
