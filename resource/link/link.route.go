@@ -11,11 +11,11 @@ func CreateRoutes() {
 	api := api.New()
 	lc := NewLinkController()
 
-	api.CreateRoute("/link", "POST", middleware.Validator(lv.Create), lc.Create)
-	api.CreateRoute("/link/:hash", "GET", lc.FindOne)
-	api.CreateRoute("/link", "GET", lc.FindAll)
-	api.CreateRoute("/link/:hash", "PATCH", middleware.Validator(lv.Update), lc.Update)
-	api.CreateRoute("/link/:hash", "DELETE", lc.Delete)
-	api.CreateRoute("/link/:hash/clicks", "PATCH", lc.UpdateClick)
+	api.CreateRoute("/links", "POST", middleware.Validator(lv.Create), lc.Create)
+	api.CreateRoute("/links/:hash", "GET", lc.FindOne)
+	api.CreateRoute("/links", "GET", lc.FindAll)
+	api.CreateRoute("/links/:hash", "PATCH", middleware.Validator(lv.Update), lc.Update)
+	api.CreateRoute("/links/:hash", "DELETE", lc.Delete)
+	api.CreateRoute("/links/:hash/clicks", "PATCH", lc.UpdateClick)
 
 }
