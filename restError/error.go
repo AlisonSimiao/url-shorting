@@ -11,7 +11,7 @@ func (e *Err) Error() string {
 
 func (e *Err) JsonError() map[string]string {
 	return map[string]string{
-		"Mensagem": e.Mensagem,
+		"mensagem": e.Mensagem,
 	}
 }
 

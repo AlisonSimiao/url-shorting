@@ -95,6 +95,9 @@ func (u *UserService) create(body User) (UserResponse, *rest_error.Err) {
 		Id:    body.Id,
 		Name:  body.Name,
 		Email: body.Email,
+		Username: body.Username,
+		Status: body.Status,
+		Pro:    body.Pro,
 		//Url:   urlPhoto,
 	}, nil
 }

@@ -15,6 +15,7 @@ var Messages = govalidator.MapData{
 	"email": []string{
 		"required:" + message.Required("email"),
 		"email:" + message.Email(),
+		"max:" + message.MaxLength("email", "255"),
 	},
 	"password": []string{
 		"required:" + message.Required("password"),
