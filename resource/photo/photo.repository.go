@@ -1,6 +1,6 @@
 package photo
 
-import "url-shorting/repository"
+import "vagas-api/repository"
 
 type PhotoRepository struct {
 	repository.Repository

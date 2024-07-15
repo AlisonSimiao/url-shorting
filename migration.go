@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
-	db "url-shorting/database"
+	db "vagas-api/database"
+
 	"github.com/joho/godotenv"
 )
 
@@ -18,14 +19,9 @@ func main() {
 		return
 	}
 
-	database := db.GetDatabase()
+	//database := db.GetDatabase()
 
 	fmt.Println("Init Migration")
-
-	// Alterar o tamanho da coluna password
-	if err := database.Exec("ALTER TABLE users ALTER COLUMN password TYPE VARCHAR(255)").Error; err != nil {
-		fmt.Printf("Erro ao alterar o tamanho da coluna: %v", err)
-	}
 
 	fmt.Println("Migration Success")
 }

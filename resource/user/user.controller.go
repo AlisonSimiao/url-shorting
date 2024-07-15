@@ -1,7 +1,7 @@
 package user
 
 import (
-	//"url-shorting/resource/photo"
+	//"vagas-api/resource/photo"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

@@ -3,10 +3,11 @@ package user
 import (
 	//"mime/multipart"
 	"time"
-	"url-shorting/repository"
-	"url-shorting/resource/photo"
-	rest_error "url-shorting/restError"
-	"url-shorting/token"
+	"vagas-api/repository"
+	"vagas-api/resource/photo"
+	rest_error "vagas-api/restError"
+	"vagas-api/token"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -92,12 +93,12 @@ func (u *UserService) create(body User) (UserResponse, *rest_error.Err) {
 	}
 
 	return UserResponse{
-		Id:    body.Id,
-		Name:  body.Name,
-		Email: body.Email,
+		Id:       body.Id,
+		Name:     body.Name,
+		Email:    body.Email,
 		Username: body.Username,
-		Status: body.Status,
-		Pro:    body.Pro,
+		Status:   body.Status,
+		Pro:      body.Pro,
 		//Url:   urlPhoto,
 	}, nil
 }

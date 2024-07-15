@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
-	API "url-shorting/api"
-	db "url-shorting/database"
-	routes "url-shorting/route"
+	API "vagas-api/api"
+	db "vagas-api/database"
+	routes "vagas-api/route"
 
 	"github.com/joho/godotenv"
 )

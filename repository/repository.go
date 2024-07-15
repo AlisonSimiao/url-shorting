@@ -1,7 +1,8 @@
 package repository
 
 import (
-	db "url-shorting/database"
+	db "vagas-api/database"
+
 	"gorm.io/gorm"
 )
 

@@ -1,10 +1,9 @@
 package routes
 
 import (
-	API "url-shorting/api"
-	"url-shorting/middleware"
-	"url-shorting/resource/link"
-	"url-shorting/resource/user"
+	API "vagas-api/api"
+	"vagas-api/middleware"
+	"vagas-api/resource/user"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,6 +18,4 @@ func Routes() {
 
 	api.Use(middleware.Auth)
 	user.CreatePrivateRoutes()
-	link.CreateRoutes()
-
 }

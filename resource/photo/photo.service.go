@@ -2,7 +2,7 @@ package photo
 
 import (
 	"mime/multipart"
-	"url-shorting/storage"
+	"vagas-api/storage"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,6 +1,6 @@
 package user
 
-import "url-shorting/repository"
+import "vagas-api/repository"
 
 type UserRepository struct {
 	repository.Repository

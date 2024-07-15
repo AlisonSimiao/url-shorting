@@ -1,8 +1,8 @@
 package user
 
 import (
-	"url-shorting/api"
-	"url-shorting/middleware"
+	"vagas-api/api"
+	"vagas-api/middleware"
 )
 
 var uv = NewUserValidate()

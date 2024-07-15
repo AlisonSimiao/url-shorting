@@ -4,9 +4,9 @@
 
 ## Acesso
 
-#### URL 
+#### URL
 
-- https://url-shorting-7jko.onrender.com
+- <https://vagas-api-7jko.onrender.com>
 
 ## Frontend
 
@@ -14,7 +14,7 @@
 
 - TypeScript
   - Next.js
-  - Tailwind CSS 
+  - Tailwind CSS
 
 ### Telas
 
@@ -47,25 +47,7 @@ POST | /users/singin | Se logar na rede
 POST |  /users/singup | Se cadastrar
 GET | /users/:username | Pesquisar usuário
 PATCH | /users/:username | Alterar usuário
-POST | /link | Criar link
-GET | /link | Buscar todos link
-GET | /link/:hash | Buscar um link
-PATCH | /link/:hash | Atualizar um link
-DELETE | /link/:hash | Deletar um link
-PATCH | /link/:hash/click | Atualizar a quantidade de clicks 
 
 ### Tabelas
 
 - users
-- qrcodes
-- clicks
-- links
-
-### Schema
-
-![imagem do schema](./assets/schema.png)
-
-### API Externas
-
-- Gerar QR Code
-  - url: https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example

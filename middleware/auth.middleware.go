@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"net/http"
-	"url-shorting/token"
+	"vagas-api/token"
 
 	"github.com/gin-gonic/gin"
 )

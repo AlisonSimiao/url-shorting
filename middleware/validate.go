@@ -5,7 +5,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"net/url"
-	message "url-shorting/utils"
+	message "vagas-api/utils"
 
 	"github.com/gin-gonic/gin"
 	"github.com/thedevsaddam/govalidator"
@@ -21,6 +21,7 @@ var Messages = govalidator.MapData{
 		"required:" + message.Required("password"),
 		"min:" + message.MinLength("password", "6"),
 		"max:" + message.MaxLength("password", "20"),
+		"alpha:" + message.Alpha("password"),
 		"alpha_num:" + message.AlphaNum("password"),
 	},
 	"name": []string{
@@ -40,6 +41,7 @@ var Messages = govalidator.MapData{
 		"required:" + message.Required("username"),
 		"min" + message.MinLength("username", "3"),
 		"max:" + message.MaxLength("username", "16"),
+		"alpha:" + message.Alpha("username"),
 		"alpha_num:" + message.AlphaNum("username"),
 	},
 	"status": []string{

@@ -20,7 +20,7 @@ func (a *API) IsRuning() bool {
 
 func New() *API {
 	if api.instance == nil {
-		gin.SetMode(gin.ReleaseMode)
+		gin.SetMode(gin.DebugMode)
 		api.instance = gin.Default()
 	}
 

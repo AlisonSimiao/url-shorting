@@ -10,11 +10,11 @@ type UserValidate struct {
 
 var rulesCreate = govalidator.MapData{
 	"email":    {"required", "email", "max:255"},
-	"password": {"required", "min:6", "max:32", "alpha_num"},
-	"name":     {"required", "min:3", "max:100", "alpha_num"},
-	"username":     {"required", "min:3", "max:16", "alpha_num"},
-	"status":     {"min:3", "max:100", "alpha_num"},
-	"pro":     {"min:3", "max:100", "alpha_num"},
+	"password": {"required", "min:6", "max:32", "alpha"},
+	"name":     {"required", "min:3", "max:100", "alpha"},
+	"username":     {"required", "min:3", "max:16", "alpha"},
+	"status":     {"bool"},
+	"pro":     {"bool"},
 }
 
 var rulesUpdate = govalidator.MapData{
