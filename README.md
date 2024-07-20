@@ -2,6 +2,25 @@
 
 # Encurtador de links
 
+## init
+
+- instalar golang
+- go mod tidy
+- go run main.go
+
+status code | descrição
+--- | ---
+200 | ok
+201 | created
+204 | no response
+400 | erro request
+401 | no authorized
+403 | forbidden
+404 | no found
+409 | conflict
+422 | umprocesss
+429 | rate limit
+
 ## Acesso
 
 #### URL
