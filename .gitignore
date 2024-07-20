@@ -1,6 +1,35 @@
-//variaveis de ambiente
-.env
+# Diretórios gerados pelo Go
+/bin/
+/pkg/
+/vendor/
 
-// builds
-go.mod
+# Arquivos de compilação
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Arquivos de dependências
 go.sum
+
+#Arquivos e diretórios temporários
+*.log
+*.out
+*.tmp
+*.swp
+*.bak
+*.old
+
+# Arquivos de IDEs e editores de texto
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# envolviment
+.env
