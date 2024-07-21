@@ -67,6 +67,14 @@ func (u *UserService) update(id int, body User) *rest_error.Err {
 	return nil
 }
 
+	// @Summary cria novo usuario
+	// @Description usuarios
+	// @Accept  json
+	// @Produce  json
+	// @Success 201 {object} UserResponse
+	// @Failure 400 {object} rest_error.Err "We need ID!!"
+	// @Failure 404 {object} rest_error.Err "Can not find ID"
+	// @Router /users [post]
 func (u *UserService) create(body User) (UserResponse, *rest_error.Err) {
 	var user UserResponse
 	//urlPhoto := photoService.GetDefaultPhoto()
@@ -103,6 +111,13 @@ func (u *UserService) create(body User) (UserResponse, *rest_error.Err) {
 	}, nil
 }
 
+// @tags User
+// @Summary Get a list of books in the the store
+// @Description get string by ID
+// @Accept  json
+// @Produce  json
+// @Success 200 "ok"
+// @Router /books [get]
 func (u *UserService) login(body UserLogin) (LoginResponse, *rest_error.Err) {
 	values := make(object)
 	var user User
