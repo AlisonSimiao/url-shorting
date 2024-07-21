@@ -1,3 +1,24 @@
+definitions:
+  rest_error.Err:
+    properties:
+      mensagem:
+        type: string
+    type: object
+  user.UserResponse:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      pro:
+        type: boolean
+      status:
+        type: boolean
+      username:
+        type: string
+    type: object
 info:
   contact:
     email: support@swagger.io
@@ -7,7 +28,41 @@ info:
   termsOfService: http://swagger.io/terms/
   title: Vagas API
   version: "0.1"
-paths: {}
+paths:
+  /books:
+    get:
+      consumes:
+      - application/json
+      description: get string by ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+      summary: Get a list of books in the the store
+      tags:
+      - User
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: usuarios
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/user.UserResponse'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/rest_error.Err'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/rest_error.Err'
+      summary: cria novo usuario
 securityDefinitions:
   JWT:
     in: header

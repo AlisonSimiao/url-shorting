@@ -10,9 +10,6 @@
 *.so
 *.dylib
 
-# Arquivos de dependências
-go.sum
-
 #Arquivos e diretórios temporários
 *.log
 *.out
