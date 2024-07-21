@@ -1,6 +1,2 @@
 //variaveis de ambiente
 .env
-
-// builds
-go.mod
-go.sum
